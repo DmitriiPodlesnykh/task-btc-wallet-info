@@ -23,8 +23,8 @@ public class WalletInfoRecord {
     @Column(name = "AMOUNT")
     private BigDecimal amount;
 
-    @JsonFormat(shape= JsonFormat.Shape.STRING,
-            pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+//    @JsonFormat(shape= JsonFormat.Shape.STRING,
+//            pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
     @Column(name = "DATE_TIME")
     private LocalDateTime datetime;
 

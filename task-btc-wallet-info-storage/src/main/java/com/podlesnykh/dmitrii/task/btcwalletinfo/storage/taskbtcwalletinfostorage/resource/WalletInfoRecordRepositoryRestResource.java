@@ -10,10 +10,14 @@ import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RepositoryRestResource(path = "wallet-info")
+@RepositoryRestResource(path = "wallet-info-records")
 public interface WalletInfoRecordRepositoryRestResource extends CrudRepository<WalletInfoRecord, BigInteger> {
 
-    @RestResource(path = "/")
+    @RestResource
     List<WalletInfoRecord> findByDatetimeBetween(@Param("startDate") LocalDateTime startDate,
                                                  @Param("endDate") LocalDateTime endDate);
+
+    @RestResource
+    @Override
+    <S extends WalletInfoRecord> S save(S entity);
 }

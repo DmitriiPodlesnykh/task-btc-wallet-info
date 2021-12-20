@@ -16,6 +16,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 class WalletInfoRecordRepositoryRestResourceTest {
 
+    private static final String TEST_URL_BASE = "/api/v1/wallet-info-records";
+
     @Autowired
     private MockMvc mvc;
 
@@ -24,12 +26,14 @@ class WalletInfoRecordRepositoryRestResourceTest {
 
     @Test
     void findByDatetimeBetween() throws Exception{
-        RequestBuilder builder = get("/wallet-info")
+        RequestBuilder builder = get(TEST_URL_BASE)
                 .param("startDate", "2009-10-05T13:00:00+00:00")
                 .param("endDate", "2039-10-05T13:00:00+00:00");
 
         mvc.perform(builder)
                 .andExpect(status().isOk());
+
+        assertEquals(2, sut.count());
     }
 
     @Test
@@ -37,7 +41,7 @@ class WalletInfoRecordRepositoryRestResourceTest {
 
         assertEquals(2, sut.count());
 
-        RequestBuilder builder = post("/wallet-info")
+        RequestBuilder builder = post(TEST_URL_BASE)
                 .param("amount", "10")
                 .param("datetime", "2019-10-05T13:00:00+00:00");
         mvc.perform(builder)
